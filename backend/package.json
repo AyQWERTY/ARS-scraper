@@ -1,0 +1,30 @@
+{
+  "name": "ars-scraper",
+  "version": "0.0.1",
+  "description": "This package allows you to collect prices on ARS Gift Cards for Steam",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyQWERTY/ARS-scraper.git"
+  },
+  "keywords": [
+    "steam",
+    "gift-cards",
+    "ars",
+    "scraper",
+    "parser"
+  ],
+  "author": "AyQWERTY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AyQWERTY/ARS-scraper/issues"
+  },
+  "homepage": "https://github.com/AyQWERTY/ARS-scraper#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
