@@ -16,11 +16,14 @@ app.get("/refresh", function(req, res) {
         ggsel: [],
     };
     
-    Promise.all([parsers.eneba]).then(values => {
-        stores.eneba = values[0];
-        res.send(stores);
-    })    
-    
+    Promise.all([parsers.eneba, parsers.g2a]).then(values => { // not sure it works more than once
+        stores.eneba = values[0];        
+        stores.g2a = values[1];
+
+        console.log(`New Request! Answered stats: Eneba: ${stores.eneba.length} | G2A: ${stores.g2a.length}`)
+        res.send(stores); // Temporarily. Until the address "/prices" is implemented.
+    });
+
     // res.send('Слава Україні!')
 });
 
@@ -33,5 +36,5 @@ app.get("/prices", function(req, res){
 
 
 app.listen(3000, function(){
-    console.log("Server is waiting to connect...");
+    console.info("Server is waiting to connect...");
 });
