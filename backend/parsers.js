@@ -16,7 +16,7 @@ exports.eneba = new Promise((resolve, reject) => {
             
             Object.entries(bigdata).forEach(obj => {
                 if (obj[1].hasOwnProperty('amount'))
-                    cards.push({amount: parseInt(obj[0].match(/\d+/)[0]), price: parseFloat(obj[1].amount) / 100});
+                    cards.push({amount: parseInt(obj[0].match(/\d+/)[0]), price: Math.round(parseFloat(obj[1].amount) * 1.23) / 100});
             });
             resolve(cards);
         })
@@ -28,7 +28,6 @@ exports.eneba = new Promise((resolve, reject) => {
 
 // ----- G2A Parcer -----
 exports.g2a = new Promise((resolve, reject) => {
-    console.log('meow');
     const config = {
         headers: { 
           'Accept-Encoding': 'gzip, deflate, br', 
