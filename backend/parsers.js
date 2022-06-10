@@ -3,19 +3,23 @@ const cheerio = require('cheerio');
 
 
 // ----- Eneba Parcer -----
-const eneba =   axios.get('https://www.eneba.com/store?text=ARS%20Steam%20Gift%20Card&currency=USD')
-                    .then(ax => {
-                        console.log(`statusCode: ${ax.status}`);
-                        const $ = cheerio.load(ax.data);
-                        var bigdata = JSON.parse($('#__APOLLO_STATE__').text());
-                        
-                        Object.entries(bigdata).forEach(obj => {
-                            if (obj[1].hasOwnProperty('amount')){
-                                console.log(obj[1]);
-                            }
-                        });
-                        
-                    })
-                    .catch(error => {
-                        console.error(error);
-                });
+exports.eneba = new Promise((resolve, reject) => {
+    axios.get('https://www.eneba.com/store?text=ARS%20Steam%20Gift%20Card&currency=USD')
+        .then(ax => {
+            var cards = [];
+
+            console.log(`Eneba | statusCode: ${ax.status}`);
+            const $ = cheerio.load(ax.data);
+            var bigdata = JSON.parse($('#__APOLLO_STATE__').text());
+            
+            Object.entries(bigdata).forEach(obj => {
+                if (obj[1].hasOwnProperty('amount'))
+                    cards.push({amount: parseInt(obj[0].match(/\d+/)[0]), price: parseFloat(obj[1].amount) / 100});
+            });
+            resolve(cards);
+        })
+        .catch(error => {
+            console.error(error);
+            reject(error);
+    });
+})

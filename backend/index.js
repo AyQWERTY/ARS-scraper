@@ -7,11 +7,21 @@ const jsonParser = express.json();
 const filePath = "prices.json";
 
 
-app.get("/refresh", function(req, res){
-    parsers.eneba();
-
-
-    res.send('Слава Україні!')
+app.get("/refresh", function(req, res) {
+    var stores = {
+        eneba: [],
+        g2a: [],
+        plati: [],
+        wmcentre: [],
+        ggsel: [],
+    };
+    
+    Promise.all([parsers.eneba]).then(values => {
+        stores.eneba = values[0];
+        res.send(stores);
+    })    
+    
+    // res.send('Слава Україні!')
 });
 
 app.get("/prices", function(req, res){
