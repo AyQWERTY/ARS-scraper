@@ -1,4 +1,5 @@
 const express = require("express")
+const parsers = require('./parsers')
 const fs = require("fs");
     
 const app = express();
@@ -7,7 +8,10 @@ const filePath = "prices.json";
 
 
 app.get("/refresh", function(req, res){
-    
+    parsers.eneba();
+
+
+    res.send('Слава Україні!')
 });
 
 app.get("/prices", function(req, res){

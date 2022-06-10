@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/AyQWERTY/ARS-scraper#readme",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.11",
     "express": "^4.18.1"
   }
 }
